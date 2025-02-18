@@ -8,6 +8,8 @@ namespace mission6_assignment.Models;
 public class Application
 {
     //each of these represents a column, typically assigned to a database
+    //change
+    //another change
     [Required]
     public required string Category { get; set; }
     
