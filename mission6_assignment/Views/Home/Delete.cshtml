@@ -1,0 +1,14 @@
+@model Movie
+
+<!--this page shows the user they have successfully deleted a movie
+    includes a question and a delete or cancel button-->
+<h2>
+    Are you sure you want to delete this application?
+</h2>
+
+<h3>@Model.Title</h3>
+<form method="post">
+    <input type="hidden" asp-for="MovieId"/>
+    <button class="btn btn-danger" type="submit">Delete</button>
+    <a class="btn btn-success" asp-controllor="Home" asp-action="MoviesList">Cancel</a>
+</form>

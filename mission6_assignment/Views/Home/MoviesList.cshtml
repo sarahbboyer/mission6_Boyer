@@ -1,0 +1,40 @@
+<!-- this needs to be a list-->
+@model List<Movie>
+
+<!-- this page shows all of the movies in the database-->
+<table class="table table-bordered table-striped" style="width: 100%; font-family: Arial, sans-serif;">
+    <thead class="fw-bold" style="background-color: #007bff; color: white;">
+    <tr>
+        <td>Category</td>
+        <td>Title</td>
+        <td>Year</td>
+        <td>Director</td>
+        <td>Rating</td>
+        <td>Edited</td>
+        <td>Lent To</td>
+        <td>Copied To Plex</td>
+        <td>Notes</td>
+    </tr>
+    </thead>
+    <tbody>
+    <!--this should loop through each moview one by one using x, which will dynamically change based on the id-->
+    @foreach (var x in Model)
+    {
+        <tr style="background-color: #e0f0ff;">
+            <td>@x.Category?.CategoryName</td>
+            <td>@x.Title</td>
+            <td>@x.Year</td>
+            <td>@x.Director</td>
+            <td>@x.Rating</td>
+            <td>@(x.Edited == 1 ? "Yes" : "No")</td>
+            <td>@x.LentTo</td>
+            <td>@x.CopiedToPlex</td>
+            <td>@x.Notes</td>
+            
+            <!--colored buttons for edit and delete-->
+            <td><a class="btn btn-success" style="padding: 6px 12px; font-size: 14px;" asp-controller="Home" asp-action="Edit" asp-route-id="@x.MovieId">Edit</a></td>
+            <td><a class="btn btn-danger" style="padding: 6px 12px; font-size: 14px;" asp-controller="Home" asp-action="Delete" asp-route-id="@x.MovieId">Delete</a></td>
+        </tr>
+    }
+    </tbody>
+</table>
