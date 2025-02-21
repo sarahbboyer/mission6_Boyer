@@ -10,5 +10,6 @@ public class MoviesAppContext : DbContext //inherit from dbcontext
     }
     //what are we storing in our database? dating applications! 
     //we are putting a table in our database
-    public DbSet<Application> Applications { get; set; }
+    public DbSet<Movie> Movies { get; set; }
+    public DbSet<Category> Categories { get; set; }
 }

@@ -32,6 +32,7 @@ app.UseRouting();
 
 app.UseAuthorization();
 
+//connect to the routes, make sure routes match throughout the program
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");

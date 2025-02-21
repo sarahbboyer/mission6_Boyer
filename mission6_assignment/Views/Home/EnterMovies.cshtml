@@ -1,37 +1,60 @@
-@model Application
+@model Movie
 
 <!-- adding a movie functionality: category, title, director, rating, edited, lent to, notes -->
 <!-- 1. category: dropdown, title: text box, director: text box, rating: dropdown, edited: dropdown, lent to: text box, notes: text box -->
 <!-- this should be a post-->
 <h1>Add a Movie to the Joel Hilton Film Collection</h1>
 <form method="post">
-    <label asp-for="Category" >Category:</label>
-    <input asp-for="Category" required />
+    <!-- the movie id needs to be there but needs to be hidden -->
+    <input type="hidden" asp-for="MovieId"/>
     <br/>
-    <label asp-for="Title">Title</label>
-    <input asp-for="Title" required />
+    <!-- category: dropdown, title: text box, director: text box, rating: dropdown, edited: dropdown, lent to: text box, notes: text box -->
+    <label asp-for="CategoryId">Category:</label>
+    <select asp-for="CategoryId">
+        <option value="">Select a Category</option>
+        @foreach (Category c in ViewBag.Categories)
+        {
+            <option value="@c.CategoryId">@c.CategoryName</option>
+        }
+    </select>
+    <br/>
+    <label asp-for="Title">Title:</label>
+    <input asp-for="Title" required/>
+    <br/>
+    <label asp-for="Year">Year:</label>
+    <input asp-for="Year" required type="number" min="1888" max="2400"/>
     <br/>
     <label asp-for="Director">Director:</label>
-    <input asp-for="Director" required />
+    <input asp-for="Director"/>
     <br/>
     <label asp-for="Rating">Rating:</label>
-    <select asp-for="Rating" asp-items="@(new SelectList(new[] {"G", "PG","PG-13","R"}))" required >
+    <select asp-for="Rating" asp-items="@(new SelectList(new[] { "G", "PG", "PG-13", "R", "TV-14", "NR", "UR", "TV-PG", "TV-Y7", "TV-MA" }))">
         <option value="">Select Rating</option>
     </select>
     <br/>
     <label asp-for="Edited">Edited:</label>
-    <select asp-for="Edited" asp-items="@(new SelectList(new[] {
-                                            new { Value = true, Text = "Yes" },
-                                            new { Value = false, Text = "No" }
-                                        }, "Value", "Text"))">
-        <option value="">Select Option</option>
+    <select asp-for="Edited" required asp-items="@(new SelectList(new[]
+                                                 {
+                                                     new { Value = true, Text = "Yes" },
+                                                     new { Value = false, Text = "No" }
+                                                 }, "Value", "Text"))">
+        <option value="" selected disabled>Select Option</option>
     </select>
     <br/>
     <label asp-for="LentTo">Lent To:</label>
     <input asp-for="LentTo"/>
     <br/>
+    <label asp-for="CopiedToPlex">Copied To Plex:</label>
+    <select asp-for="CopiedToPlex" required asp-items="@(new SelectList(new[]
+                                                       {
+                                                           new { Value = true, Text = "Yes" },
+                                                           new { Value = false, Text = "No" }
+                                                       }, "Value", "Text"))">
+        <option value="" selected disabled>Select Option</option>
+    </select>
+    <br/>
     <label asp-for="Notes">Notes:</label>
-    <input asp-for="Notes"  maxlength="25"/>
+    <input asp-for="Notes" maxlength="25"/>
     <br/>
     <button type="submit">Submit</button>
 </form>
